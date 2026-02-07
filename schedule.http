@@ -1,0 +1,6 @@
+### Find all schedules
+GET http://localhost:8080/schedules
+
+### Find schedule with id
+
+GET http://localhost:8080/schedules/3
