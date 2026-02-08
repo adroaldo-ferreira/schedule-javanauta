@@ -16,3 +16,6 @@ Content-Type: application/json
     "client": "Jane Smith",
     "contact": "555-1234"
 }
+
+### Get schedules by date
+GET http://localhost:8080/schedules/date/2026-02-15

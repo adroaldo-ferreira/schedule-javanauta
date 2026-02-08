@@ -1,7 +1,11 @@
 package br.dev.hygino.schedule.controller;
 
+import java.time.LocalDate;
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -41,5 +45,11 @@ public class ScheduleController {
         } catch (ScheduleAlreadyExistsException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
+    }
+
+    @GetMapping("date/{date}")
+    public ResponseEntity<List<ResponseScheduleDto>> getSchedulesByDate(
+            @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
+        return ResponseEntity.ok().body(scheduleService.findByScheduledDate(date));
     }
 }

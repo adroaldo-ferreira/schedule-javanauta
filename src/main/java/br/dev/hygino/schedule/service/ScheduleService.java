@@ -1,6 +1,8 @@
 package br.dev.hygino.schedule.service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.domain.Page;
@@ -55,5 +57,20 @@ public class ScheduleService {
         Schedule schedule = scheduleMapper.toScheduleEntity(requestScheduleDto);
         schedule = scheduleRepository.save(schedule);
         return scheduleMapper.toResponseScheduleDto(schedule);
+    }
+
+    public void removeSchedule(String client, LocalDateTime scheduledDateTime) {
+        scheduleRepository.deleteByClientAndScheduledDateTime(client, scheduledDateTime);
+    }
+
+    @Transactional(readOnly = true)
+    public List<ResponseScheduleDto> findByScheduledDate(LocalDate date) {
+        final LocalDateTime start = date.atStartOfDay();
+        final LocalDateTime end = date.atTime(23, 59, 59);
+
+        return scheduleRepository.findByScheduledDateTimeBetween(start, end)
+                .stream()
+                .map(scheduleMapper::toResponseScheduleDto)
+                .toList();
     }
 }
