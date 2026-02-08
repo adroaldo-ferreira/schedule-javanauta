@@ -1,5 +1,6 @@
 package br.dev.hygino.schedule.mappers;
 
+import br.dev.hygino.schedule.dto.RequestScheduleDto;
 import br.dev.hygino.schedule.dto.ResponseScheduleDto;
 import br.dev.hygino.schedule.infrastructure.entity.Schedule;
 import org.mapstruct.Mapper;
@@ -8,4 +9,6 @@ import org.mapstruct.Mapper;
 public interface ScheduleMapper {
 
     ResponseScheduleDto toResponseScheduleDto(Schedule schedule);
+
+    Schedule toScheduleEntity(RequestScheduleDto requestScheduleDto);
 }

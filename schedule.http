@@ -4,3 +4,15 @@ GET http://localhost:8080/schedules
 ### Find schedule with id
 
 GET http://localhost:8080/schedules/3
+
+### Create a new schedule
+POST http://localhost:8080/schedules
+Content-Type: application/json
+
+{
+    "service": "Haircut",
+    "professional": "John Doe",
+    "scheduledDateTime": "2024-07-01T10:00:00",
+    "client": "Jane Smith",
+    "contact": "555-1234"
+}
