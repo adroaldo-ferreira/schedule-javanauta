@@ -1,6 +1,5 @@
 package br.dev.hygino.schedule.infrastructure.repository;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -14,15 +13,18 @@ import br.dev.hygino.schedule.infrastructure.entity.Schedule;
 @Repository
 public interface ScheduleRepository extends JpaRepository<Schedule, Long> {
 
-    Optional<Schedule> findByServiceAndScheduledDateTimeBetween(
-            String service,
-            LocalDateTime startDateTime,
-            LocalDateTime endDateTime);
+        Optional<Schedule> findByServiceAndScheduledDateTimeBetween(
+                        String service,
+                        LocalDateTime startDateTime,
+                        LocalDateTime endDateTime);
 
-    @Transactional
-    void deleteByClientAndScheduledDateTime(String client, LocalDateTime scheduledDateTime);
+        @Transactional
+        void deleteByClientAndScheduledDateTime(String client, LocalDateTime scheduledDateTime);
 
-    List<Schedule> findByScheduledDateTimeBetween(
-            LocalDateTime startDateTime,
-            LocalDateTime endDateTime);
+        List<Schedule> findByScheduledDateTimeBetween(
+                        LocalDateTime startDateTime,
+                        LocalDateTime endDateTime);
+
+        @Transactional(readOnly = true)
+        Optional<Schedule> findByClientAndScheduledDateTime(String client, LocalDateTime scheduledDateTime);
 }

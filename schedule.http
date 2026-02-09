@@ -19,3 +19,13 @@ Content-Type: application/json
 
 ### Get schedules by date
 GET http://localhost:8080/schedules/date/2026-02-15
+
+### Update schedule
+PATCH http://localhost:8080/schedules
+Content-Type: application/json
+
+{
+    "oldDate": "2026-02-15T09:00:00",
+    "newDate": "2026-02-25T09:00:00",
+    "client": "André Luiz Pereira"
+}

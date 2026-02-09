@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.dev.hygino.schedule.dto.RequestScheduleDto;
 import br.dev.hygino.schedule.dto.ResponseScheduleDto;
+import br.dev.hygino.schedule.dto.UpdateRequestScheduleDto;
 import br.dev.hygino.schedule.service.ScheduleService;
 import br.dev.hygino.schedule.service.exceptions.ScheduleAlreadyExistsException;
 import lombok.RequiredArgsConstructor;
@@ -51,5 +53,13 @@ public class ScheduleController {
     public ResponseEntity<List<ResponseScheduleDto>> getSchedulesByDate(
             @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
         return ResponseEntity.ok().body(scheduleService.findByScheduledDate(date));
+    }
+
+    @PatchMapping
+    public ResponseEntity<ResponseScheduleDto> modifySchedule(
+            @RequestBody UpdateRequestScheduleDto dto) {
+        var result = scheduleService.modifySchedule(dto);
+
+        return ResponseEntity.ok(result);
     }
 }

@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.dev.hygino.schedule.dto.RequestScheduleDto;
 import br.dev.hygino.schedule.dto.ResponseScheduleDto;
+import br.dev.hygino.schedule.dto.UpdateRequestScheduleDto;
 import br.dev.hygino.schedule.infrastructure.entity.Schedule;
 import br.dev.hygino.schedule.infrastructure.repository.ScheduleRepository;
 import br.dev.hygino.schedule.mappers.ScheduleMapper;
@@ -72,5 +73,14 @@ public class ScheduleService {
                 .stream()
                 .map(scheduleMapper::toResponseScheduleDto)
                 .toList();
+    }
+
+    @Transactional
+    public ResponseScheduleDto modifySchedule(UpdateRequestScheduleDto dto) {
+        var scheduleResult = scheduleRepository.findByClientAndScheduledDateTime(dto.client(), dto.oldDate())
+                .orElseThrow(() -> new ScheduleNotFoundException("Schedule not found!"));
+        scheduleResult.setScheduledDateTime(dto.newDate());
+
+        return scheduleMapper.toResponseScheduleDto(scheduleResult);
     }
 }
