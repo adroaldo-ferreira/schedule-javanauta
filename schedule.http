@@ -29,3 +29,6 @@ Content-Type: application/json
     "newDate": "2026-02-25T09:00:00",
     "client": "André Luiz Pereira"
 }
+
+### Delete schedule
+DELETE http://localhost:8080/schedules?client=Jane Smith&dateTime=2024-07-01T10:00:00

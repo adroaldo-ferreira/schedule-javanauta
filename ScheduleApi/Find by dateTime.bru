@@ -1,0 +1,16 @@
+meta {
+  name: Find by dateTime
+  type: http
+  seq: 5
+}
+
+get {
+  url: {{host}}/schedules/date/2026-02-14
+  body: none
+  auth: inherit
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

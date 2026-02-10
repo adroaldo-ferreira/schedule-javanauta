@@ -1,0 +1,26 @@
+meta {
+  name: Insert
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{host}}/schedules
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "service": "Haircut",
+    "professional": "John Doe",
+    "scheduledDateTime": "2024-07-01T10:00:00",
+    "client": "Jane Smith",
+    "contact": "555-1234"
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
